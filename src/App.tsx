@@ -1,32 +1,45 @@
 import { Component } from 'react';
+import CardList from './components/card-list/card-list.component';
 import './App.css';
 
-type nameState = {
-    name: string
+export interface directoryEntry {
+    name: string,
+    id: number,
+    email: string
 }
 
-class App extends Component<{}, nameState> {
+export interface directoryState {
+    directory: directoryEntry[]
+}
 
-    state: nameState = {
-        name: 'Graham'
+class App extends Component<{}, directoryState> {
+
+    state: directoryState = {
+        directory: [ 
+            {
+                name: 'Graham',
+                id: 0,
+                email: 'graham@com'
+            },
+            {
+                name: 'Anessa',
+                id: 1,
+                email: 'anessa@com'
+            },
+            {
+                name: 'Marie',
+                id: 2,
+                email: 'marie@com'
+            },
+        ]
+        
     };
 
     render() {
 
         return (
             <div className="App">
-                <header className="App-header">
-                    <p>Hi {this.state.name}</p>
-                    <button onClick={
-                        () => {
-                            this.setState((state, props) => {
-                                return {
-                                    name: 'Anessa'
-                                };
-                            }, () => {})
-                        }
-                    }>Click Me</button>
-                </header>
+                <CardList directory={this.state.directory} />
             </div>
         );
     }
